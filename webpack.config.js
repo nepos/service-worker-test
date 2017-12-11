@@ -22,14 +22,9 @@ module.exports = {
 			globDirectory: dist,
 			globPatterns: ['**/*.{html,js,css}'],
 			swDest: path.join(dist, 'sw.js'),
+			swSrc: path.join("src", 'sw.js'),
 			clientsClaim: true,
-			skipWaiting: true,
-			runtimeCaching: [
-				{
-					urlPattern: /.+api\/get/,
-					handler: 'cacheFirst'
-				}
-			]
+			skipWaiting: true
 		})
 	]
 };
