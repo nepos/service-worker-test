@@ -10,7 +10,7 @@ workbox.routing.registerRoute(
 	workbox.strategies.networkOnly({
 		plugins: [
 			new workbox.backgroundSync.Plugin(
-				"bg-sync-queue",
+				"post-v1",
 				{
 					callbacks: {
 						queueDidReplay: (reqs) => {
