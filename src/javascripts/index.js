@@ -5,7 +5,10 @@ document.getElementById("get-btn").addEventListener("click", () => {
 		method: "GET"
 	})
 		.then(res => res.text())
-		.then(bodyText => console.log(bodyText));
+		.then((bodyText) => {
+			console.log(bodyText);
+			return new Response(bodyText);
+		})
 });
 
 document.getElementById("post-btn").addEventListener("click", () => {
