@@ -15,7 +15,11 @@ document.getElementById("post-btn").addEventListener("click", () => {
 		method: "POST"
 	})
 		.then(res => res.text())
-		.then(bodyText => console.log(bodyText));
+		.then((bodyText) => {
+			console.log(bodyText);
+			return new Response(bodyText);
+		})
+		.catch(err => console.log(err))
 });
 
 document.getElementById("put-btn").addEventListener("click", () => {

@@ -2,7 +2,7 @@ const path = require('path'),
 	htmlPlugin = require('html-webpack-plugin'),
 	cleanPlugin = require('clean-webpack-plugin'),
 	dist = 'dist',
-	workboxPlugin = require('workbox-webpack-plugin');
+	workboxPlugin = require('workbox-webpack-plugin').InjectManifest;
 
 module.exports = {
 	entry: {
@@ -19,12 +19,11 @@ module.exports = {
 			template: 'src/index.html'
 		}),
 		new workboxPlugin({
-			globDirectory: dist,
+			globDirectory: "src",
 			globPatterns: ['**/*.{html,js,css}'],
-			swDest: path.join(dist, 'sw.js'),
+			swDest: 'sw.js',
 			swSrc: path.join("src", 'sw.js'),
-			clientsClaim: true,
-			skipWaiting: true
+			maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
 		})
 	]
 };
