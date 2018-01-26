@@ -15,7 +15,7 @@ workbox.routing.registerRoute(
 		return (url.pathname === '/api/get');
 	},
 	workbox.strategies.networkFirst({
-		cacheName: "get-v1",
+		cacheName: "get-v2",
 		plugins: [
 			new workbox.expiration.Plugin({
 				//maxAgeSeconds: 120,
@@ -65,3 +65,17 @@ workbox.routing.registerRoute(
 	}),
 	"POST"
 );
+
+this.addEventListener('activate', (event) => {
+	const cacheWhitelist = ['get-v2'];
+
+	event.waitUntil(
+		caches.keys().then(function(keyList) {
+			return Promise.all(keyList.map(function(key) {
+				if (cacheWhitelist.indexOf(key) === -1) {
+					return caches.delete(key);
+				}
+			}));
+		})
+	);
+});
