@@ -15,13 +15,13 @@ workbox.routing.registerRoute(
 		return (url.pathname === '/api/get');
 	},
 	workbox.strategies.networkFirst({
-		cacheName: "get-v1"//,
-		// plugins: [
-		// 	new workbox.expiration.Plugin({
-		// 		maxAgeSeconds: 120,
-		// 		maxEntries: 5
-		// 	})
-		// ]
+		cacheName: "get-v1",
+		plugins: [
+			new workbox.expiration.Plugin({
+				//maxAgeSeconds: 120,
+				maxEntries: 5
+			})
+		]
 	})
 );
 

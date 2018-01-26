@@ -9,6 +9,7 @@ document.getElementById("get-btn").addEventListener("click", () => {
 			console.log(bodyText);
 			return new Response(bodyText);
 		})
+		.catch(err => console.log(err))
 });
 
 document.getElementById("post-btn").addEventListener("click", () => {
