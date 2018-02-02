@@ -12,14 +12,14 @@ workbox.routing.setCatchHandler(({url, event, params}) => {
 
 workbox.routing.registerRoute(
 	({url, event}) => {
-		return (url.pathname === '/api/get');
+		return (url.pathname.startsWith('/api/get'));
 	},
-	workbox.strategies.networkFirst({
+	workbox.strategies.cacheFirst({
 		cacheName: "get-v2",
 		plugins: [
 			new workbox.expiration.Plugin({
 				//maxAgeSeconds: 120,
-				maxEntries: 5
+				maxEntries: 10000
 			})
 		]
 	})

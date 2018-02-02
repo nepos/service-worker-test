@@ -1,15 +1,18 @@
 document.getElementById("get-btn").addEventListener("click", () => {
 	console.log("get button was clicked");
 
-	fetch("http://192.168.24.151:3001/api/get", {
-		method: "GET"
-	})
-		.then(res => res.text())
-		.then((bodyText) => {
-			console.log(bodyText);
-			return new Response(bodyText);
-		})
-		.catch(err => console.log(err))
+	for (i = 0; i < 4000; i++) {
+		setTimeout((i) => {
+			fetch("http://192.168.24.151:3001/api/get/" + i, {
+				method: "GET"
+			})
+				.then(res => res.text())
+				.then((bodyText) => {
+					console.log(bodyText.slice(0,10));
+				})
+				.catch(err => console.log(err))
+		}, 20, i);
+	}
 });
 
 document.getElementById("post-btn").addEventListener("click", () => {
@@ -34,6 +37,20 @@ document.getElementById("put-btn").addEventListener("click", () => {
 	})
 		.then(res => res.text())
 		.then(bodyText => console.log(bodyText));
+});
+
+document.getElementById("cache-keys-btn").addEventListener("click", () => {
+	caches.keys().then(function(cacheNames) {
+		console.log(cacheNames);
+	});
+
+	caches.open('get-v2').then(function(cache) {
+		for (i = 0; i < 4000; i++) {
+			cache.match('http://192.168.24.151:3001/api/get/' + i).then(function(response) {
+				console.log(response);
+			});
+		}
+	})
 });
 
 if ('serviceWorker' in navigator) {
