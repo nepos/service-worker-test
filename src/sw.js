@@ -66,9 +66,10 @@ workbox.routing.registerRoute(
 	"POST"
 );
 
+// tasks which are executed when the service worker runs for the first time
 this.addEventListener('activate', (event) => {
+	// remove old versions of the cache
 	const cacheWhitelist = ['get-v2'];
-
 	event.waitUntil(
 		caches.keys().then(function(keyList) {
 			return Promise.all(keyList.map(function(key) {

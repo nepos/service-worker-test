@@ -1,7 +1,7 @@
 document.getElementById("get-btn").addEventListener("click", () => {
 	console.log("get button was clicked");
 
-	for (i = 0; i < 4000; i++) {
+	for (i = 0; i < 2000; i++) {
 		setTimeout((i) => {
 			fetch("http://192.168.24.151:3001/api/get/" + i, {
 				method: "GET"
@@ -53,6 +53,7 @@ document.getElementById("cache-keys-btn").addEventListener("click", () => {
 	})
 });
 
+// register service worker
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker.register('sw.js')
